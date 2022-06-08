@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<BuildPackage>true</BuildPackage>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<IsPackable>true</IsPackable>
+		<BuildOutputTargetFolder>lib</BuildOutputTargetFolder>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Ccs.Ppg.Utility.Cache\Ccs.Ppg.Utility.Cache.csproj" Pack="true" PackagePath="/lib">
+			<Pack>true</Pack>
+			<IncludeAssets>all</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj" Pack="true"  PackagePath="/lib">
+			<IncludeAssets>all</IncludeAssets>
+		</ProjectReference>
+
+	</ItemGroup>
+	<ItemGroup>
+		<_PackageFiles Include="$(OutputPath)\*.dll">
+			<BuildAction>None</BuildAction>
+			<PackagePath>lib\net6.0\</PackagePath>
+		</_PackageFiles>
+	</ItemGroup>
+</Project>
