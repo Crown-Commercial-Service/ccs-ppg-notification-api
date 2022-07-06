@@ -10,15 +10,12 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
-	
-	<ItemGroup>
-		<PackageReference Include="Ccs.Ppg.Utility.Logging" Version="1.0.0" />
-		<PackageReference Include="Ccs.Ppg.Utility.Swagger" Version="1.0.0" />
-	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\microservices\Ccs.Ppg.Utility.Authorization\Ccs.Ppg.Utility.Authorization.csproj" />
 		<ProjectReference Include="..\Ccs.Ppg.NotificationService\Ccs.Ppg.NotificationService.csproj" />
+		<ProjectReference Include="..\Ccs.Ppg.Utility.Authorization\Ccs.Ppg.Utility.Authorization.csproj" />
+		<ProjectReference Include="..\Ccs.Ppg.Utility.Logging\Ccs.Ppg.Utility.Logging.csproj" />
+		<ProjectReference Include="..\Ccs.Ppg.Utility.Swagger\Ccs.Ppg.Utility.Swagger.csproj" />
 	</ItemGroup>
 
 </Project>

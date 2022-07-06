@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ccs.Ppg.Utility.Constants",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ccs.Ppg.Utility.Exceptions", "Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj", "{0ECAC669-CBF8-4911-8787-26354B477659}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ccs.Ppg.Utility.Logging", "Ccs.Ppg.Utility.Logging\Ccs.Ppg.Utility.Logging.csproj", "{9D73587B-C2FE-4C23-8E67-2E6ADC211EC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ccs.Ppg.Utility.Swagger", "Ccs.Ppg.Utility.Swagger\Ccs.Ppg.Utility.Swagger.csproj", "{02234335-EF98-48CF-A49E-13C8AF865AC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{0ECAC669-CBF8-4911-8787-26354B477659}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ECAC669-CBF8-4911-8787-26354B477659}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ECAC669-CBF8-4911-8787-26354B477659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D73587B-C2FE-4C23-8E67-2E6ADC211EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D73587B-C2FE-4C23-8E67-2E6ADC211EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D73587B-C2FE-4C23-8E67-2E6ADC211EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D73587B-C2FE-4C23-8E67-2E6ADC211EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02234335-EF98-48CF-A49E-13C8AF865AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02234335-EF98-48CF-A49E-13C8AF865AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02234335-EF98-48CF-A49E-13C8AF865AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02234335-EF98-48CF-A49E-13C8AF865AC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

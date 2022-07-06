@@ -29,7 +29,7 @@ namespace Ccs.Ppg.NotificationService.API
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            services.AddSwagger(xmlPath,"Ccs.Ppg.NotificationService.API", "v1");
+            services.AddSwagger(xmlPath,"Ccs.Ppg.NotificationService.API","v1");
         }
 
         public static void ConfigurePipeline(this WebApplication app)
