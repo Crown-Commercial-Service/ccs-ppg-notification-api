@@ -41,7 +41,7 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
 
       Data.Add("IsApiGatewayEnabled", _secrets.Data["IsApiGatewayEnabled"].ToString());
       Data.Add("ApiKey", _secrets.Data["ApiKey"].ToString());
-      Data.Add("OrganisationApiUrl", _secrets.Data["organisationApiUrl"].ToString());
+      Data.Add("OrganisationApiUrl", _secrets.Data["OrganisationApiUrl"].ToString());
 
       if (_secrets.Data.ContainsKey("RedisCache"))
       {
@@ -65,7 +65,7 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
       if (_secrets.Data.ContainsKey("apis"))
       {
         var apisSettingsVault = JsonConvert.DeserializeObject<APIsSettingsVault>(_secrets.Data["apis"].ToString());
-        Data.Add("apis:organisationUrl", apisSettingsVault.OrganisationUrl);
+        Data.Add("apis:OrganisationUrl", apisSettingsVault.OrganisationUrl);
       }
     }
   }
