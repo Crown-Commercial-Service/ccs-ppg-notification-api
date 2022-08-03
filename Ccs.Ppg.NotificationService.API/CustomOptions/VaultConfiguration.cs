@@ -37,7 +37,7 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
     public async Task GetSecrets()
     {
       var mountPathValue = _vcapSettings.credentials.backends_shared.space.Split("/secret").FirstOrDefault();
-      var _secrets = await _client.V1.Secrets.KeyValue.V1.ReadSecretAsync("secret/core", mountPathValue);
+      var _secrets = await _client.V1.Secrets.KeyValue.V1.ReadSecretAsync("secret/notification", mountPathValue);
 
       Data.Add("IsApiGatewayEnabled", _secrets.Data["IsApiGatewayEnabled"].ToString());
       Data.Add("ApiKey", _secrets.Data["ApiKey"].ToString());
