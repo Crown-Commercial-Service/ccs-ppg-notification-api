@@ -12,6 +12,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="appsecrets.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="appsecrets.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="VaultSharp" Version="1.7.1" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Ccs.Ppg.NotificationService\Ccs.Ppg.NotificationService.csproj" />
 		<ProjectReference Include="..\Ccs.Ppg.Utility.Authorization\Ccs.Ppg.Utility.Authorization.csproj" />
 		<ProjectReference Include="..\Ccs.Ppg.Utility.Logging\Ccs.Ppg.Utility.Logging.csproj" />
