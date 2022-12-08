@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="VaultSharp" Version="1.7.1" />
+	  <PackageReference Include="VaultSharp" Version="1.7.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>
