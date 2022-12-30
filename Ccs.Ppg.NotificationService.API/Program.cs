@@ -12,11 +12,19 @@ if (!vaultEnabled)
 }
 else
 {
-  builder.Configuration.AddVault(options =>
+  var source = builder.Configuration.GetValue<string>("Source");
+  if (source.ToUpper() == "AWS")
   {
-    var vaultOptions = builder.Configuration.GetSection("Vault");
-    options.Address = vaultOptions["Address"];
-  });
+    builder.Configuration.AddParameterStore();
+  }
+  else
+  {
+    builder.Configuration.AddVault(options =>
+    {
+      var vaultOptions = builder.Configuration.GetSection("Vault");
+      options.Address = vaultOptions["Address"];
+    });
+  }
 }
 
 // Add services to the container.
