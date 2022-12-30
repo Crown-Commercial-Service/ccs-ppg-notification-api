@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Ccs.Ppg.NotificationService
 {
-    public static class Startup
+  public static class Startup
+  {
+    public static void AddServices(this IServiceCollection services, IConfiguration config)
     {
-        public static void AddServices(this IServiceCollection services, IConfiguration config)
-        {
-            services.AddScoped<IMessageProviderService, MessageProviderService>();
-
-        }
+      services.AddScoped<IMessageProviderService, MessageProviderService>();
+      services.AddScoped<IAwsParameterStoreService, AwsParameterStoreService>();
     }
+  }
 }
