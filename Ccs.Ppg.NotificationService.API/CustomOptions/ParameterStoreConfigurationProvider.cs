@@ -45,11 +45,11 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
       if (!string.IsNullOrEmpty(dbName))
       {
         var dynamicDBConnection = GetDatbaseConnectionString(dbName, dbConnection);
-        Data.Add("ConnectionStrings/CcsSso", dynamicDBConnection);
+        Data.Add("ConnectionStrings:CcsSso", dynamicDBConnection);
       }
       else
       {
-        Data.Add("ConnectionStrings/CcsSso", dbConnection);
+        Data.Add("ConnectionStrings:CcsSso", dbConnection);
       }
 
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "apis/OrganisationUrl", "apis:OrganisationUrl"));
