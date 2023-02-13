@@ -7,5 +7,9 @@ applications:
   buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack.git
   routes:
     - route: CF_SPACE-api-notification.london.cloudapps.digital
+  services:
+    - CF_SPACE-sso-pg-service
+    - CF_SPACE-vault
+    - CF_SPACE-ssm-service
   env:
     CACHE_NUGET_PACKAGES: false
