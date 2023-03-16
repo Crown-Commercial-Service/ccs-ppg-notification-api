@@ -42,6 +42,8 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
       var dbName = _awsParameterStoreService.FindParameterByName(parameters, path + "ConnectionStrings/Name");
       var dbConnection = _awsParameterStoreService.FindParameterByName(parameters, path + "ConnectionStrings/CcsSso");
 
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "Email/ApiKey", "Email:ApiKey"));
+
       if (!string.IsNullOrEmpty(dbName))
       {
         var dynamicDBConnection = GetDatbaseConnectionString(dbName, dbConnection);
