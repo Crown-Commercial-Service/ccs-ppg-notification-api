@@ -16,6 +16,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
         {
             _messageProviderService = messageProviderService;
         }
+
         /// <summary>
         /// Allows a user to send SMS
         /// </summary>
