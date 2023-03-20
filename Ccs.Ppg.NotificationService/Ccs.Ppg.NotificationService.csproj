@@ -8,10 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.102.26" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.100.94" />
     <PackageReference Include="GovukNotify" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj" />
   </ItemGroup>
 
 </Project>

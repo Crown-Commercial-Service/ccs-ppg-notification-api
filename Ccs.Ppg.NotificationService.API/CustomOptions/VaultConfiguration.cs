@@ -67,6 +67,12 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
         var apisSettingsVault = JsonConvert.DeserializeObject<APIsSettingsVault>(_secrets.Data["apis"].ToString());
         Data.Add("apis:OrganisationUrl", apisSettingsVault.OrganisationUrl);
       }
+
+      if (_secrets.Data.ContainsKey("Email"))
+      {
+        var emailsettings = JsonConvert.DeserializeObject<Email>(_secrets.Data["Email"].ToString());
+        Data.Add("Email:ApiKey", emailsettings.ApiKey);
+      }
     }
   }
 
@@ -121,5 +127,9 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
   public class APIsSettingsVault
   {
     public string OrganisationUrl { get; set; }
+  }
+  public class Email
+  {
+    public string ApiKey { get; set; }
   }
 }
