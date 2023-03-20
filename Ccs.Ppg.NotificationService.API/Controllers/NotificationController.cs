@@ -14,10 +14,13 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
   {
     private readonly IMessageProviderService _messageProviderService;
     private readonly IEmailProviderService _emailProviderService;
-    public NotificationController(IMessageProviderService messageProviderService, IEmailProviderService emailProviderService)
+    private readonly IAwsSqsService _awsSqsService;
+
+    public NotificationController(IMessageProviderService messageProviderService, IEmailProviderService emailProviderService, IAwsSqsService awsSqsService)
     {
       _messageProviderService = messageProviderService;
       _emailProviderService = emailProviderService;
+      _awsSqsService = awsSqsService;
     }
 
     /// <summary>
@@ -78,7 +81,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
       {
         if (ex.Message == "ERROR_IDAM_REGISTRATION_FAILED" || ex.Message.Contains("Your system clock must be accurate to within 30 seconds"))
         {
-          await _emailProviderService.PushUserConfirmFailedEmailToDataQueueAsync(emailInfoRequest);
+          await _awsSqsService.PushUserConfirmFailedEmailToDataQueueAsync(emailInfoRequest);
         }
         else
         {

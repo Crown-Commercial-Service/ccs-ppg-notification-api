@@ -87,8 +87,5 @@ namespace Ccs.Ppg.NotificationService.API
 
       app.MapControllers();
     }
-
-
-
   }
 }

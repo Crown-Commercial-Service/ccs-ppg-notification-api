@@ -6,7 +6,6 @@ namespace Ccs.Ppg.NotificationService.Services.IServices
   {
     Task SendEmailAsync(EmailInfo emailInfo);
 
-    Task PushUserConfirmFailedEmailToDataQueueAsync(object emailInfo);
     Task<string> GetActivationEmailVerificationLink(string email);
   }
 }
