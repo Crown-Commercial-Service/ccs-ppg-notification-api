@@ -2,6 +2,8 @@
 using Amazon.SQS.Model;
 using Ccs.Ppg.NotificationService.Model;
 using Ccs.Ppg.NotificationService.Services.IServices;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Ccs.Ppg.NotificationService.Services
 {
@@ -11,13 +13,15 @@ namespace Ccs.Ppg.NotificationService.Services
     private const string NumberValueType = "Number";
 
     private readonly AmazonSQSClient _sqsClient;
-    public AwsSqsService(SqsConfiguration sqsConfiguration)
+    private readonly IConfiguration _configuration;
+    public AwsSqsService(SqsConfiguration sqsConfiguration, IConfiguration configuration)
     {
       var sqsConfig = new AmazonSQSConfig
       {
         ServiceURL = sqsConfiguration.ServiceUrl
       };
       _sqsClient = new AmazonSQSClient(sqsConfiguration.AccessKeyId, sqsConfiguration.AccessSecretKey, sqsConfig);
+      _configuration = configuration;
     }
 
     /// <summary>
@@ -103,29 +107,56 @@ namespace Ccs.Ppg.NotificationService.Services
           }));
       }
 
-        return messageAttributeValues;
+      return messageAttributeValues;
+    }
+
+    /// <summary>
+    /// Get message attributes with numeric values (DataType = Number)
+    /// </summary>
+    /// <param name="numberCustomAttributes"></param>
+    /// <returns></returns>
+    private List<KeyValuePair<string, MessageAttributeValue>> GetNumberMessageAttributes(Dictionary<string, int> numberCustomAttributes)
+    {
+      List<KeyValuePair<string, MessageAttributeValue>> messageAttributeValues = new();
+
+      foreach (KeyValuePair<string, int> property in numberCustomAttributes)
+      {
+        messageAttributeValues.Add(
+          new KeyValuePair<string, MessageAttributeValue>(property.Key, new MessageAttributeValue
+          {
+            DataType = NumberValueType,
+            StringValue = property.Value.ToString()
+          }));
       }
 
-      /// <summary>
-      /// Get message attributes with numeric values (DataType = Number)
-      /// </summary>
-      /// <param name="numberCustomAttributes"></param>
-      /// <returns></returns>
-      private List<KeyValuePair<string, MessageAttributeValue>> GetNumberMessageAttributes(Dictionary<string, int> numberCustomAttributes)
+      return messageAttributeValues;
+    }
+
+    public async Task PushUserConfirmFailedEmailToDataQueueAsync(object emailInfoRequest)
+    {
+      if (Convert.ToBoolean(_configuration["QueueInfo:EnableDataQueue"]))
       {
-        List<KeyValuePair<string, MessageAttributeValue>> messageAttributeValues = new();
-
-        foreach (KeyValuePair<string, int> property in numberCustomAttributes)
+        var emailInfo = JsonConvert.DeserializeObject<EmailInfo>(emailInfoRequest.ToString());
+        try
         {
-          messageAttributeValues.Add(
-            new KeyValuePair<string, MessageAttributeValue>(property.Key, new MessageAttributeValue
-            {
-              DataType = NumberValueType,
-              StringValue = property.Value.ToString()
-            }));
-        }
+          SqsMessageDto sqsMessageDto = new()
+          {
+            MessageBody = JsonConvert.SerializeObject(emailInfo.BodyContent),
+            StringCustomAttributes = new Dictionary<string, string>
+              {
+                { "Destination", "Notification" },
+                { "Action", "POST" },
+              }
+          };
 
-        return messageAttributeValues;
+          await SendMessageAsync(_configuration["QueueInfo:DataQueueUrl"], $"EmailId-{emailInfo.To}", sqsMessageDto);
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine($"Error sending message to queue. EmailId: {emailInfo?.To}, Error: {ex.Message}");
+        }
       }
     }
+
+  }
 }

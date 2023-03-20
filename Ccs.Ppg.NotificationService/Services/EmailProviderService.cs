@@ -56,38 +56,13 @@ namespace Ccs.Ppg.NotificationService.Services
       var response = await client.GetAsync(url);
 
       if (!response.IsSuccessStatusCode)
-      {
+        {
         throw new CcsSsoException("ERROR_IDAM_REGISTRATION_FAILED");
       }
 
       return await response.Content.ReadAsStringAsync();
     }
 
-    public async Task PushUserConfirmFailedEmailToDataQueueAsync(object emailInfoRequest)
-    {
-      if (Convert.ToBoolean(_configuration["QueueInfo:EnableDataQueue"]))
-      {
-        var emailInfo = JsonConvert.DeserializeObject<EmailInfo>(emailInfoRequest.ToString());
-        try
-        {
-          SqsMessageDto sqsMessageDto = new()
-          {
-            MessageBody = JsonConvert.SerializeObject(emailInfo),
-            StringCustomAttributes = new Dictionary<string, string>
-              {
-                { "Destination", "Notification" },
-                { "Action", "POST" },
-              }
-          };
-
-          await _awsSqsService.SendMessageAsync(_configuration["QueueInfo:DataQueueUrl"], $"EmailId-{emailInfo.To}", sqsMessageDto);
-        }
-        catch (Exception ex)
-        {
-          Console.WriteLine($"Error sending message to queue. EmailId: {emailInfo?.To}, Error: {ex.Message}");
-        }
-      }
-    }
 
   }
 }
