@@ -69,13 +69,24 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
     {
       try
       {
+        var emailRequest = JsonConvert.DeserializeObject<EmailResponseInfo>(emailInfoRequest.ToString());
 
-        var emailInfo = JsonConvert.DeserializeObject<EmailInfo>(emailInfoRequest.ToString());
-        var acticationLink = await _emailProviderService.GetActivationEmailVerificationLink(emailInfo.To);
-        if (acticationLink != null)
-          emailInfo.BodyContent["link"] = acticationLink;
-        await SendEmail(emailInfo);
-        
+        if (!emailRequest.IsUserInAuth0)
+        {
+          object queueBody = new EmailResponseInfo { EmailInfo = emailRequest.EmailInfo, IsUserInAuth0 = true };
+
+          var data = JsonConvert.SerializeObject(queueBody);
+
+          await _awsSqsService.PushUserConfirmFailedEmailToDataQueueAsync(data);
+        }
+        else
+        {
+          var emailInfo = emailRequest.EmailInfo;
+          var acticationLink = await _emailProviderService.GetActivationEmailVerificationLink(emailInfo.To);
+          if (acticationLink != null)
+            emailInfo.BodyContent["link"] = acticationLink;
+          await SendEmail(emailInfo);
+        }
       }
       catch (Exception ex)
       {
