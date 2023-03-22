@@ -67,9 +67,9 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
     [ProducesResponseType(typeof(bool), 200)]
     public async Task<bool> SendUserConfirmEmailOnlyUserIdPwd(object emailInfoRequest)
     {
+      var emailRequest = JsonConvert.DeserializeObject<EmailResponseInfo>(emailInfoRequest.ToString());
       try
       {
-        var emailRequest = JsonConvert.DeserializeObject<EmailResponseInfo>(emailInfoRequest.ToString());
 
         if (!emailRequest.IsUserInAuth0)
         {
@@ -92,7 +92,13 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
       {
         if (ex.Message == "ERROR_IDAM_REGISTRATION_FAILED" || ex.Message.Contains("Your system clock must be accurate to within 30 seconds"))
         {
-          await _awsSqsService.PushUserConfirmFailedEmailToDataQueueAsync(emailInfoRequest);
+          if (emailRequest.isMessageRetry == null || emailRequest.isMessageRetry == false)
+          {
+            await _awsSqsService.PushUserConfirmFailedEmailToDataQueueAsync(emailInfoRequest);
+          }else
+          {
+            throw;
+          }
         }
         else
         {
