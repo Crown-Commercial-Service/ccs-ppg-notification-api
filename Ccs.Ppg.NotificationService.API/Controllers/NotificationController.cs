@@ -1,10 +1,13 @@
-﻿using Ccs.Ppg.NotificationService.Model;
+﻿using Ccs.Ppg.NotificationService.API.CustomOptions;
+using Ccs.Ppg.NotificationService.Model;
 using Ccs.Ppg.NotificationService.Services.IServices;
 using Ccs.Ppg.Utility.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Swashbuckle.AspNetCore.Annotations;
+using static Dapper.SqlMapper;
 
 namespace Ccs.Ppg.NotificationService.API.Controllers
 {
@@ -73,6 +76,10 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
 
         if (!emailRequest.IsUserInAuth0)
         {
+          Console.WriteLine($"RateLimitCheck: user doesn't exists inauth 0. Email- {emailRequest.EmailInfo.To}");
+          Console.WriteLine($"RateLimitCheck: Adding message to the queue. Email- {emailRequest.EmailInfo.To}");
+
+
           object queueBody = new EmailResponseInfo { EmailInfo = emailRequest.EmailInfo, IsUserInAuth0 = true };
 
           var data = JsonConvert.SerializeObject(queueBody);
@@ -81,6 +88,8 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
         }
         else
         {
+          Console.WriteLine($"RateLimitCheck: user exists inauth 0. Email- {emailRequest.EmailInfo.To}");
+
           var emailInfo = emailRequest.EmailInfo;
           var acticationLink = await _emailProviderService.GetActivationEmailVerificationLink(emailInfo.To);
           if (acticationLink != null)
@@ -90,10 +99,16 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
       }
       catch (Exception ex)
       {
+        Console.WriteLine($"RateLimitCheck: Exception raised. Email  {emailRequest.EmailInfo.To}");
+
         if (ex.Message == "ERROR_IDAM_REGISTRATION_FAILED" || ex.Message.Contains("Your system clock must be accurate to within 30 seconds"))
         {
+          Console.WriteLine($"RateLimitCheck: Exception -ERROR_IDAM_REGISTRATION_FAILED.  Email  {emailRequest.EmailInfo.To}");
+
           if (emailRequest.isMessageRetry == null || emailRequest.isMessageRetry == false)
           {
+            Console.WriteLine($"RateLimitCheck: adding message to queue. Email  {emailRequest.EmailInfo.To}");
+
             await _awsSqsService.PushUserConfirmFailedEmailToDataQueueAsync(emailInfoRequest);
           }else
           {
