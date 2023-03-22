@@ -136,12 +136,14 @@ namespace Ccs.Ppg.NotificationService.Services
     {
       if (Convert.ToBoolean(_configuration["QueueInfo:EnableDataQueue"]))
       {
-        var emailInfo = JsonConvert.DeserializeObject<EmailInfo>(emailInfoRequest.ToString());
+        var emailResponseInfo = JsonConvert.DeserializeObject<EmailResponseInfo>(emailInfoRequest.ToString());
+        var emailInfo = emailResponseInfo.EmailInfo;
+
         try
         {
           SqsMessageDto sqsMessageDto = new()
           {
-            MessageBody = JsonConvert.SerializeObject(emailInfo.BodyContent),
+            MessageBody = JsonConvert.SerializeObject(emailResponseInfo),
             StringCustomAttributes = new Dictionary<string, string>
               {
                 { "Destination", "Notification" },
