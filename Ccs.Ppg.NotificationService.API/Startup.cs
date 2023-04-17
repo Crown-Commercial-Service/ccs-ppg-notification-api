@@ -29,10 +29,7 @@ namespace Ccs.Ppg.NotificationService.API
 
     public static void ConfigurePipeline(this WebApplication app)
     {
-      if (app.Environment.IsDevelopment())
-      {
-        app.ConfigureSwagger();
-      }
+      app.ConfigureSwagger();
 
       app.UseHttpsRedirection();
 
