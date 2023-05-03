@@ -8,7 +8,7 @@ on:
     #This scan will run on the last day of every month
     
   push:
-    branches: [main, p3sprint/*, feature/*]
+    branches: [main, sprint/*]
 jobs:
   trufflehog-scan:
     runs-on: ubuntu-latest
@@ -30,12 +30,12 @@ jobs:
         if: always()
       
         with: 
-         server_address: ${{ secrets.SERVER_ADDRESS }}
-         server_port: ${{ secrets.SERVER_PORT }}
-         username: ${{ secrets.USER_NAME }}
-         password: ${{ secrets.PASSWORD }}
+         server_address: "smtp.office365.com"
+         server_port: "587"
+         username: "secops@brickendon.com"
+         password: "gsnplrwtxpxxplfn"
          subject: Git Secrets Scan Results
-         to: "rahulgandhi.jayabalan@brickendon.com,ponselvam.sakthivel@brickendon.com"
+         to: "rahulgandhi.jayabalan@brickendon.com, ponselvam.sakthivel@brickendon.com"
          from: "secops@brickendon.com"
          body: |
            
@@ -44,6 +44,7 @@ jobs:
             The Trufflehog Monthly Deep Scan has completed for "${{ github.repository }}". Please review the results below:
                       
             Scan Job URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
             Scan Status: **${{ job.status }}**              
            
            Thank You.           
