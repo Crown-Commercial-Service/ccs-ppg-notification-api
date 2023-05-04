@@ -1,4 +1,4 @@
- name: Trufflehog Monthly Deep Scan
+name: Trufflehog Monthly Deep Scan
 
 
 on:
@@ -35,7 +35,7 @@ jobs:
          username: ${{ secrets.USER_NAME }}
          password: ${{ secrets.PASSWORD }}
          subject: Git Secrets Scan Results
-         to: "rahulgandhi.jayabalan@brickendon.com, ponselvam.sakthivel@brickendon.com"
+         to: "rahulgandhi.jayabalan@brickendon.com,ponselvam.sakthivel@brickendon.com"
          from: "secops@brickendon.com"
          body: |
            
