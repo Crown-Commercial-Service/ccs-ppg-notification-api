@@ -22,7 +22,7 @@ jobs:
         
         #Configure the correct git url of the repo to be scanned
         run: |
-          trufflehog https://github.com/Crown-Commercial-Service/conclave-ssso-ui.git --regex --entropy=FALSE
+          trufflehog https://github.com/Crown-Commercial-Service/ccs-ppg-notification-api.git --regex --entropy=FALSE
       
       - name: Send email notification
         uses: 
@@ -34,7 +34,7 @@ jobs:
          server_port: ${{ secrets.SERVER_PORT }}
          username: ${{ secrets.USER_NAME }}
          password: ${{ secrets.PASSWORD }}
-         subject: Git Secrets Scan Results
+         subject: Trufflehog Monthly Deep Scan
          to: "rahulgandhi.jayabalan@brickendon.com,ponselvam.sakthivel@brickendon.com"
          from: "secops@brickendon.com"
          body: |
