@@ -6,6 +6,11 @@ then
     CF_SPACE="uat"
 fi
 
+if [ "$TRAVIS_BRANCH" = "development" ]
+then
+    CF_SPACE="dev"
+fi
+
 if [ "$TRAVIS_BRANCH" = "training" ]
 then
     CF_SPACE="training"
