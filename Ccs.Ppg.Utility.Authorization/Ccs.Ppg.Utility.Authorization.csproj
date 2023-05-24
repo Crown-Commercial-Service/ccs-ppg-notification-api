@@ -19,6 +19,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,7 +27,7 @@
 			<Pack>true</Pack>
 			<IncludeAssets>all</IncludeAssets>
 		</ProjectReference>
-		<ProjectReference Include="..\Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj" Pack="true"  PackagePath="/lib">
+		<ProjectReference Include="..\Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj" Pack="true" PackagePath="/lib">
 			<IncludeAssets>all</IncludeAssets>
 		</ProjectReference>
 
