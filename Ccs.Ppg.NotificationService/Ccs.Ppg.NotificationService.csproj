@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.102.26" />
+    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.104.46" />
     <PackageReference Include="GovukNotify" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
