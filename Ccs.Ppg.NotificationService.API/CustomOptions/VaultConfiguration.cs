@@ -56,7 +56,14 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
         Data.Add("Message:TemplateId", messageSettingsVault.TemplateId);
       }
 
-      if (_secrets.Data.ContainsKey("ConnectionStrings"))
+			if (_secrets.Data.ContainsKey("Email"))
+			{
+				var messageSettingsVault = JsonConvert.DeserializeObject<MessageSettingsVault>(_secrets.Data["Email"].ToString());
+				Data.Add("Email:ApiKey", messageSettingsVault.ApiKey);
+				Data.Add("Email:TemplateId", messageSettingsVault.TemplateId);
+			}
+
+			if (_secrets.Data.ContainsKey("ConnectionStrings"))
       {
         var connectionStringsSettingsVault = JsonConvert.DeserializeObject<ConnectionStringsSettingsVault>(_secrets.Data["ConnectionStrings"].ToString());
         Data.Add("ConnectionStrings:CcsSso", connectionStringsSettingsVault.CcsSso);
