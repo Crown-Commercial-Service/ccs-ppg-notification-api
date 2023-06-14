@@ -12,10 +12,12 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly IMessageProviderService _messageProviderService;
-        public NotificationController(IMessageProviderService messageProviderService)
+		    private readonly IEmailProviderService _emailProviderService;		
+		    public NotificationController(IMessageProviderService messageProviderService, IEmailProviderService emailProviderService)
         {
             _messageProviderService = messageProviderService;
-        }
+			      _emailProviderService = emailProviderService;
+		    }
         /// <summary>
         /// Allows a user to send SMS
         /// </summary>
@@ -45,5 +47,13 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
         {
             return await _messageProviderService.SendMessage(message);
         }
-    }
-}
+
+		    [HttpPost("email")]
+		    [SwaggerOperation(Tags = new[] { "notification/email" })]
+		    [ProducesResponseType(typeof(bool), 200)]
+	      public async Task SendEmailAsync(EmailInfo emailInfo)
+		    {
+             await _emailProviderService.SendEmailAsync(emailInfo);
+        }			      
+		}
+	}
