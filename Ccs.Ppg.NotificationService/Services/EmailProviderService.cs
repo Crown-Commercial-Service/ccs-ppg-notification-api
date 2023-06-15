@@ -19,14 +19,20 @@ namespace Ccs.Ppg.NotificationService.Services
 		}
 		public async Task SendEmailAsync(EmailInfo emailInfo)
 		{
+			try
+			{ 
 			var apiKey = _configuration["Email:ApiKey"];
-			var templateId = !string.IsNullOrEmpty(emailInfo.TemplateId) ? emailInfo.TemplateId : _configuration["emailInfo:TemplateId"];
-
+			
 			var client = _httpClientFactory.CreateClient();
 			var httpClientWithProxy = new HttpClientWrapper(client);
 			var notificationClient = new NotificationClient(httpClientWithProxy, apiKey);
-			
-			EmailNotificationResponse response = await notificationClient.SendEmailAsync(emailInfo.To, templateId, emailInfo.BodyContent);
+
+			EmailNotificationResponse response = await notificationClient.SendEmailAsync(emailInfo.To, emailInfo.TemplateId, emailInfo.BodyContent);
+			}
+			catch (Exception ex)
+      {
+				Console.WriteLine(ex);
+			}
 		}
 	}
 }
