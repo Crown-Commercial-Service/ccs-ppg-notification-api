@@ -60,7 +60,6 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
 			{
 				var messageSettingsVault = JsonConvert.DeserializeObject<MessageSettingsVault>(_secrets.Data["Email"].ToString());
 				Data.Add("Email:ApiKey", messageSettingsVault.ApiKey);
-				Data.Add("Email:TemplateId", messageSettingsVault.TemplateId);
 			}
 
 			if (_secrets.Data.ContainsKey("ConnectionStrings"))
