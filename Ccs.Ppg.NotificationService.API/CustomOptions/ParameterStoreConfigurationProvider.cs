@@ -39,7 +39,9 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "Message/ApiKey", "Message:ApiKey"));
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "Message/TemplateId", "Message:TemplateId"));
 
-      var dbName = _awsParameterStoreService.FindParameterByName(parameters, path + "ConnectionStrings/Name");
+			configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "Email/ApiKey", "Email:ApiKey"));
+			
+			var dbName = _awsParameterStoreService.FindParameterByName(parameters, path + "ConnectionStrings/Name");
       var dbConnection = _awsParameterStoreService.FindParameterByName(parameters, path + "ConnectionStrings/CcsSso");
 
       if (!string.IsNullOrEmpty(dbName))
