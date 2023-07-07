@@ -36,3 +36,9 @@ app.ConfigurePipeline();
 
 
 app.Run();
+
+string startupUrl = Environment.GetEnvironmentVariable("STARTUP_URL");
+if (!string.IsNullOrWhiteSpace(startupUrl))
+{
+  builder.WebHost.UseUrls(startupUrl);
+}
