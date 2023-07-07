@@ -30,15 +30,15 @@ else
 // Add services to the container.
 builder.Services.ConfigureServices(builder.Configuration);
 
+string startupUrl = Environment.GetEnvironmentVariable("STARTUP_URL");
+if (!string.IsNullOrWhiteSpace(startupUrl))
+{
+  builder.WebHost.UseUrls(startupUrl);
+}
+
 var app = builder.Build();
 
 app.ConfigurePipeline();
 
 
 app.Run();
-
-string startupUrl = Environment.GetEnvironmentVariable("STARTUP_URL");
-if (!string.IsNullOrWhiteSpace(startupUrl))
-{
-  builder.WebHost.UseUrls(startupUrl);
-}
