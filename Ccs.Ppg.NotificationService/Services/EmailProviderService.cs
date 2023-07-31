@@ -17,7 +17,7 @@ namespace Ccs.Ppg.NotificationService.Services
 			_configuration = configuration;
 			_httpClientFactory = httpClientFactory;
 		}
-		public async Task SendEmailAsync(EmailInfo emailInfo)
+		public async Task<bool> SendEmailAsync(EmailInfo emailInfo)
 		{
 			try
 			{ 
@@ -25,13 +25,16 @@ namespace Ccs.Ppg.NotificationService.Services
 			
 			var client = _httpClientFactory.CreateClient();
 			var httpClientWithProxy = new HttpClientWrapper(client);
-			var notificationClient = new NotificationClient(httpClientWithProxy, apiKey);
-
-			EmailNotificationResponse response = await notificationClient.SendEmailAsync(emailInfo.To, emailInfo.TemplateId, emailInfo.BodyContent);
+				var notificationClient = new NotificationClient(httpClientWithProxy, apiKey);
+				var bodyContent = new Dictionary<string, dynamic>();
+				emailInfo.BodyContent.ToList().ForEach(pair => bodyContent.Add(pair.Key, pair.Value));
+        EmailNotificationResponse response = await notificationClient.SendEmailAsync(emailInfo.To, emailInfo.TemplateId, bodyContent);
+				return true;
 			}
 			catch (Exception ex)
-      {
+			{
 				Console.WriteLine(ex);
+				return false;
 			}
 		}
 	}

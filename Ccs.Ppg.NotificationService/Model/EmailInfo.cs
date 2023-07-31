@@ -10,6 +10,7 @@ namespace Ccs.Ppg.NotificationService.Model
 		[Required(ErrorMessage = "Email template is required")]
 		public string TemplateId { get; set; }
 
-		public Dictionary<string, dynamic> BodyContent { get; set; }
+		public Dictionary<string, string> BodyContent { get; set; }
+
 	}
 }

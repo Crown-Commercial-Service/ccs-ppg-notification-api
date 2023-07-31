@@ -75,9 +75,9 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
 		    [HttpPost("email")]
 		    [SwaggerOperation(Tags = new[] { "notification/email" })]
 		    [ProducesResponseType(typeof(bool), 200)]
-	      public async Task SendEmailAsync(EmailInfo emailInfo)
+	      public async Task<bool> SendEmailAsync(EmailInfo emailInfo)
 		    {
-          await _emailProviderService.SendEmailAsync(emailInfo);
+          return await _emailProviderService.SendEmailAsync(emailInfo);
         }			      
 		}
 }
