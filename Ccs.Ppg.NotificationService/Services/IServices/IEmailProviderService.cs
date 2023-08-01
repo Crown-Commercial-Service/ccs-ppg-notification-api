@@ -9,6 +9,6 @@ namespace Ccs.Ppg.NotificationService.Services.IServices
 {
 	public interface IEmailProviderService
 	{
-		Task<bool> SendEmailAsync(EmailInfo emailInfo);
+		Task SendEmailAsync(EmailInfo emailInfo);
 	}
 }
