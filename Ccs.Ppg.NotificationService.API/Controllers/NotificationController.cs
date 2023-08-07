@@ -41,7 +41,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
         /// </remarks>
 
         [HttpPost("sms")]
-        [SwaggerOperation(Tags = new[] { "notification service/sms" })]
+        [SwaggerOperation(Tags = new[] { "Notification Service - SMS" })]
         [ProducesResponseType(typeof(bool), 200)]
         public async Task<bool> Post(MessageRequestModel message)
         {
@@ -73,7 +73,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
 		    /// </remarks>
 
 		    [HttpPost("email")]
-		    [SwaggerOperation(Tags = new[] { "notification service/email" })]
+		    [SwaggerOperation(Tags = new[] { "Notification Service - Email" })]
 	      public async Task SendEmailAsync(EmailInfo emailInfo)
 		    {
            await _emailProviderService.SendEmailAsync(emailInfo);
