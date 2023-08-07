@@ -25,13 +25,15 @@ namespace Ccs.Ppg.NotificationService.Services
 			
 			var client = _httpClientFactory.CreateClient();
 			var httpClientWithProxy = new HttpClientWrapper(client);
-			var notificationClient = new NotificationClient(httpClientWithProxy, apiKey);
-
-			EmailNotificationResponse response = await notificationClient.SendEmailAsync(emailInfo.To, emailInfo.TemplateId, emailInfo.BodyContent);
+				var notificationClient = new NotificationClient(httpClientWithProxy, apiKey);
+				var bodyContent = new Dictionary<string, dynamic>();
+				emailInfo.BodyContent.ToList().ForEach(pair => bodyContent.Add(pair.Key, pair.Value));
+        EmailNotificationResponse response = await notificationClient.SendEmailAsync(emailInfo.To, emailInfo.TemplateId, bodyContent);
 			}
 			catch (Exception ex)
-      {
+			{
 				Console.WriteLine(ex);
+				throw new Exception(ex.Message);
 			}
 		}
 	}
