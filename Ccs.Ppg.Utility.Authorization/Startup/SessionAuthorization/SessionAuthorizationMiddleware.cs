@@ -16,7 +16,7 @@ namespace Ccs.Ppg.Utility.Authorization
         private readonly IConfiguration _config;
         private readonly ITokenService _tokenService;
         private readonly ICcsServiceCacheService _ccsServiceCacheService;
-
+        private const string healthEndPoint = "health-check";
 
         public SessionAuthorizationMiddleware(RequestDelegate next,
             IRedisCacheService redisCacheService,
@@ -33,6 +33,14 @@ namespace Ccs.Ppg.Utility.Authorization
 
         public async Task Invoke(HttpContext context, RequestContext requestContext)
         {
+            var path = context.Request.Path.Value.TrimStart('/').TrimEnd('/');
+            
+            if (path.ToUpper() == healthEndPoint.ToUpper())
+            {
+              context.Response.StatusCode = 200;
+              return;
+            }
+
             var success = await ValidateTokenOrApiKey(context, requestContext);
             if (success)
                 await _next(context);
