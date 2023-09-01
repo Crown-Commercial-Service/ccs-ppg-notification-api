@@ -38,13 +38,8 @@ namespace Ccs.Ppg.Utility.Swagger
 
         public static void ConfigureSwagger(this IApplicationBuilder app)
         {
-            app.UseSwagger(c =>
-            {
-              c.RouteTemplate = "notification-service/swagger/{documentname}/swagger.json";
-            });
-            app.UseSwaggerUI(c => {
-              c.RoutePrefix = "notification-service/swagger";
-            });
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
     }
 }
