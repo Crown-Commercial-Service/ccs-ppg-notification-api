@@ -55,6 +55,7 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
       }
 
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "apis/OrganisationUrl", "apis:OrganisationUrl"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "EnableXRay", "EnableXRay"));
 
       foreach (var configuration in configurations)
       {
