@@ -1,3 +1,5 @@
+using Amazon.XRay.Recorder.Core;
+using Amazon.XRay.Recorder.Handlers.AwsSdk;
 using Ccs.Ppg.NotificationService.API;
 using Ccs.Ppg.NotificationService.API.CustomOptions;
 
@@ -37,6 +39,14 @@ if (!string.IsNullOrWhiteSpace(startupUrl))
 }
 
 var app = builder.Build();
+
+if (!string.IsNullOrEmpty(builder.Configuration["EnableXRay"]) && Convert.ToBoolean(builder.Configuration["EnableXRay"]))
+{
+  Console.WriteLine("x-ray is enabled.");
+  AWSXRayRecorder.InitializeInstance(configuration: builder.Configuration);
+  app.UseXRay("NotificationApi");
+  AWSSDKHandler.RegisterXRayForAllServices();
+}
 
 app.ConfigurePipeline();
 
