@@ -40,8 +40,6 @@ if (!string.IsNullOrWhiteSpace(startupUrl))
 
 var app = builder.Build();
 
-app.ConfigurePipeline();
-
 if (!string.IsNullOrEmpty(builder.Configuration["EnableXRay"]) && Convert.ToBoolean(builder.Configuration["EnableXRay"]))
 {
   Console.WriteLine("x-ray is enabled.");
@@ -49,5 +47,7 @@ if (!string.IsNullOrEmpty(builder.Configuration["EnableXRay"]) && Convert.ToBool
   app.UseXRay("NotificationApi");
   AWSSDKHandler.RegisterXRayForAllServices();
 }
+
+app.ConfigurePipeline();
 
 app.Run();
