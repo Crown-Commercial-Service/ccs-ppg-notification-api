@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -19,7 +19,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
