@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS NotificationAPI
+FROM mcr.microsoft.com/dotnet/sdk:6.0.416-bookworm-slim AS NotificationAPI
 WORKDIR /app
 COPY . ./
 RUN dotnet restore ./Ccs.Ppg.NotificationService.API/Ccs.Ppg.NotificationService.API.csproj
