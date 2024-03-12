@@ -1,5 +1,7 @@
 ﻿using Ccs.Ppg.NotificationService.Model;
 using Ccs.Ppg.NotificationService.Services.IServices;
+using Ccs.Ppg.Utility.Constants.Constants;
+using Ccs.Ppg.Utility.Exceptions.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Notify.Client;
@@ -10,32 +12,38 @@ namespace Ccs.Ppg.NotificationService.Services
   public class MessageProviderService : IMessageProviderService
   {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly IConfiguration _configuration;
+    private readonly ApplicationConfigurationInfo _applicationConfigurationInfo;
 
-    public MessageProviderService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+    public MessageProviderService(IHttpClientFactory httpClientFactory, ApplicationConfigurationInfo applicationConfigurationInfo)
     {
       _httpClientFactory = httpClientFactory;
-      _configuration = configuration;
+      _applicationConfigurationInfo = applicationConfigurationInfo;
     }
 
     public async Task<bool> SendMessage(MessageRequestModel messageInfo)
     {
       try
       {
-        var apiKey = _configuration["Message:ApiKey"];
-        var templateId = !string.IsNullOrEmpty(messageInfo.TemplateId) ? messageInfo.TemplateId : _configuration["Message:TemplateId"];
+        // var data = new Dictionary<string, dynamic> { { "code", messageInfo.Message } };
+        var data = new Dictionary<string, dynamic>();
+        messageInfo.Message.ForEach(message => data.Add(message.key, message.Message));
+
+        bool isValidationEnbled = _applicationConfigurationInfo.NotificationValidationConfigurations.EnableValidation;
+        if (isValidationEnbled && !ValidateMessage(messageInfo.Message?.FirstOrDefault()))
+        {
+          Console.WriteLine(ErrorConstant.ErrorInvalidDetails);
+          throw new CcsSsoException(ErrorConstant.ErrorInvalidDetails);
+        }
+
+        var apiKey = _applicationConfigurationInfo.MessageSettings.ApiKey;
+        var templateId = !string.IsNullOrEmpty(messageInfo.TemplateId) ? messageInfo.TemplateId : _applicationConfigurationInfo.MessageSettings.TemplateId;
 
         var client = _httpClientFactory.CreateClient();
         var httpClientWithProxy = new HttpClientWrapper(client);
         var notificationClient = new NotificationClient(httpClientWithProxy, apiKey);
 
-        // var data = new Dictionary<string, dynamic> { { "code", messageInfo.Message } };
-        var data = new Dictionary<string, dynamic>();
-        messageInfo.Message.ForEach(message => data.Add(message.key, message.Message));
-
         SmsNotificationResponse response = notificationClient.SendSms(mobileNumber: messageInfo.PhoneNumber, templateId: templateId, personalisation: data);
         return true;
-
       }
       catch (Exception ex)
       {
@@ -43,6 +51,16 @@ namespace Ccs.Ppg.NotificationService.Services
         return false;
       }
 
+    }
+
+    public bool ValidateMessage(MessageInfo msgInfo)
+    {
+      var msgLength = _applicationConfigurationInfo.NotificationValidationConfigurations.SmsMsgLength;
+      if (msgInfo != null && msgInfo.Message.Length > msgLength)
+      {
+        return false;
+      }
+      return true;
     }
   }
 }

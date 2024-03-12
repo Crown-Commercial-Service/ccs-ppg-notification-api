@@ -17,4 +17,9 @@
 	<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ccs.Ppg.Utility.Constants\Ccs.Ppg.Utility.Constants.csproj" />
+    <ProjectReference Include="..\Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj" />
+  </ItemGroup>
+
 </Project>
