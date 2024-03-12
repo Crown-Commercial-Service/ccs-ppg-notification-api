@@ -16,7 +16,8 @@ namespace Ccs.Ppg.NotificationService
     {
       services.AddScoped<IMessageProviderService, MessageProviderService>();
       services.AddScoped<IAwsParameterStoreService, AwsParameterStoreService>();
-      services.AddScoped<IEmailProviderService, EmailProviderService>();
+      services.AddScoped<IWrapperConfigurationService, WrapperConfigurationService>();
+      services.AddScoped<IEmailProviderService, EmailProviderService>();      
     }
   }
 }
