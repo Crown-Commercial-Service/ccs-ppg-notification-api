@@ -56,6 +56,21 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
 
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "apis/OrganisationUrl", "apis:OrganisationUrl"));
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "EnableXRay", "EnableXRay"));
+      
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "WrapperApiSettings/ConfigApiKey", "WrapperApiSettings:ConfigApiKey"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "WrapperApiSettings/ApiGatewayEnabledConfigUrl", "WrapperApiSettings:ApiGatewayEnabledConfigUrl"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "WrapperApiSettings/ApiGatewayDisabledConfigUrl", "WrapperApiSettings:ApiGatewayDisabledConfigUrl"));
+      
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/EnableValidation", "NotificationValidationConfigurations:EnableValidation"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/SmsMsgLength", "NotificationValidationConfigurations:SmsMsgLength"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/OrgNameLegnth", "NotificationValidationConfigurations:OrgNameLegnth"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/EmailRegex", "NotificationValidationConfigurations:EmailRegex"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/FirstNameLength", "NotificationValidationConfigurations:FirstNameLength"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/LastNameLength", "NotificationValidationConfigurations:LastNameLength"));
+      configurations.AddRange(_awsParameterStoreService.GetParameterFromCommaSeparated(parameters, path + "NotificationValidationConfigurations/SignInProviders", "NotificationValidationConfigurations:SignInProviders"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/LinkRegex", "NotificationValidationConfigurations:LinkRegex"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/CcsMsg", "NotificationValidationConfigurations:CcsMsg"));
+
 
       foreach (var configuration in configurations)
       {
