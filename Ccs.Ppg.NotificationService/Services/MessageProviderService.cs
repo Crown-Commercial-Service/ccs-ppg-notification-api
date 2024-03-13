@@ -28,6 +28,12 @@ namespace Ccs.Ppg.NotificationService.Services
         var data = new Dictionary<string, dynamic>();
         messageInfo.Message.ForEach(message => data.Add(message.key, message.Message));
 
+        Console.WriteLine("SmsInfo Properties:");
+        foreach (var d in data)
+        {
+          Console.WriteLine($"  {d.Key}: {d.Value}");
+        }
+
         bool isValidationEnbled = _applicationConfigurationInfo.NotificationValidationConfigurations.EnableValidation;
         if (isValidationEnbled && !ValidateMessage(messageInfo.Message?.FirstOrDefault()))
         {
@@ -56,6 +62,7 @@ namespace Ccs.Ppg.NotificationService.Services
     public bool ValidateMessage(MessageInfo msgInfo)
     {
       var msgLength = _applicationConfigurationInfo.NotificationValidationConfigurations.SmsMsgLength;
+      Console.WriteLine("Message OTP: " + msgInfo.Message);
       if (msgInfo != null && msgInfo.Message.Length > msgLength)
       {
         return false;
