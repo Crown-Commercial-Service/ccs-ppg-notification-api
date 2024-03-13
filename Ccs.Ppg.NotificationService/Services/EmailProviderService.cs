@@ -27,6 +27,23 @@ namespace Ccs.Ppg.NotificationService.Services
     {
       try
       {
+        //Adding log for testing purpose
+        Console.WriteLine("EmailInfo Properties:");
+        Console.WriteLine($"To: {emailInfo.To}");
+        Console.WriteLine($"TemplateId: {emailInfo.TemplateId}");
+        if (emailInfo.BodyContent != null)
+        {
+          Console.WriteLine("BodyContent:");
+          foreach (var kvp in emailInfo.BodyContent)
+          {
+            Console.WriteLine($"  {kvp.Key}: {kvp.Value}");
+          }
+        }
+        else
+        {
+          Console.WriteLine("BodyContent: (null)");
+        }
+
         var bodyContent = new Dictionary<string, dynamic>();
         emailInfo.BodyContent.ToList().ForEach(pair => bodyContent.Add(pair.Key, pair.Value));
         bool isValidationEnbled = _applicationConfigurationInfo.NotificationValidationConfigurations.EnableValidation;
