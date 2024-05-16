@@ -136,7 +136,8 @@ namespace Ccs.Ppg.NotificationService.Services
 					case "mfaresetlink":
 					case "federatedlogin":
 					case "conclaveloginlink":
-						{
+					case "orgregistersationlink":
+            {
 							var linkRegex = _applicationConfigurationInfo.NotificationValidationConfigurations.LinkRegex;
 							Regex re = new Regex(linkRegex);
 							if (!string.IsNullOrEmpty(msg.Value) && !re.IsMatch(msg.Value))
