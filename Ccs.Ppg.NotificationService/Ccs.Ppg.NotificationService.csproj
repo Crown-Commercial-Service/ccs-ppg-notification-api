@@ -8,13 +8,18 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.102.26" />
-    <PackageReference Include="GovukNotify" Version="6.0.0" />
+    <PackageReference Include="GovukNotify" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	<PackageReference Include="System.Net.Http" Version="4.3.4" />
 	<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ccs.Ppg.Utility.Constants\Ccs.Ppg.Utility.Constants.csproj" />
+    <ProjectReference Include="..\Ccs.Ppg.Utility.Exceptions\Ccs.Ppg.Utility.Exceptions.csproj" />
   </ItemGroup>
 
 </Project>
