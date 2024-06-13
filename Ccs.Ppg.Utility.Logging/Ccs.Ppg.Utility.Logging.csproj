@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -22,7 +22,7 @@
 	<ItemGroup>
 		<_PackageFiles Include="$(OutputPath)\*.dll">
 			<BuildAction>None</BuildAction>
-			<PackagePath>lib\net6.0\</PackagePath>
+			<PackagePath>lib\net8.0\</PackagePath>
 		</_PackageFiles>
 	</ItemGroup>
 </Project>
