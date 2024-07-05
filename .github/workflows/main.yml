@@ -21,7 +21,7 @@ jobs:
         run: |
           trufflehog https://github.com/rahulgandhijayabalan-bc/ccs-ppg-notification-api.git --regex --entropy=TRUE
       
-      - #name: Send email notification
+      #- name: Send email notification
         #uses: 
           #dawidd6/action-send-mail@v3.1.0
         #if: always()
