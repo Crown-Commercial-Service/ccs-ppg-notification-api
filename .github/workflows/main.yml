@@ -1,5 +1,11 @@
 name: Trufflehog PR Scan
 
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+  pull-requests: write
+
 on:
   pull_request:
     branches:
