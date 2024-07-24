@@ -9,14 +9,16 @@ permissions:
 on:
   pull_request:
     branches:
-      - "**"
-      
+      - "${{ github.event.repository.default_branch }}"
+
 jobs:
   trufflehog-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Install Trufflehog
         run: |
@@ -25,7 +27,7 @@ jobs:
       - name: Run Trufflehog Scan
         id: trufflehog
         run: |
-          trufflehog https://github.com/rahulgandhijayabalan-bc/ccs-ppg-notification-api.git --regex --entropy=TRUE
+          trufflehog ${{ github.repository }} --regex --entropy=TRUE
 
       - name: Scan Results Status
         if: steps.trufflehog.outcome == 'failure'
