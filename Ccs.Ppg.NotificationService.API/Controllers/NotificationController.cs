@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Ccs.Ppg.NotificationService.API.Controllers
 {
-    [Route("notification-service")]
+    [Route("notification")]
     [ApiController]
     public class NotificationController : ControllerBase
     {
@@ -29,7 +29,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /notification-service/sms
+        ///     POST /notification/sms
         ///     {
         ///        "phoneNumber": +44123456,
         ///        "templateId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -41,7 +41,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
         /// </remarks>
 
         [HttpPost("sms")]
-        [SwaggerOperation(Tags = new[] { "Notification Service - SMS" })]
+        [SwaggerOperation(Tags = new[] { "Notification - SMS" })]
         [ProducesResponseType(typeof(bool), 200)]
         public async Task<bool> Post(MessageRequestModel message)
         {
@@ -59,7 +59,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
 		    /// <remarks>
 		    /// Sample request:
 		    ///
-		    ///     POST /notification-service/email
+		    ///     POST /notification/email
 		    ///        {
 		    ///        "to": "username@xxxx.com",
 		    ///        "templateId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -73,7 +73,7 @@ namespace Ccs.Ppg.NotificationService.API.Controllers
 		    /// </remarks>
 
 		    [HttpPost("email")]
-		    [SwaggerOperation(Tags = new[] { "Notification Service - Email" })]
+		    [SwaggerOperation(Tags = new[] { "Notification - Email" })]
 	      public async Task SendEmailAsync(EmailInfo emailInfo)
 		    {
            await _emailProviderService.SendEmailAsync(emailInfo);
