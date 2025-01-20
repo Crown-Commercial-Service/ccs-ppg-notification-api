@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS NotificationAPI
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS NotificationAPI
 WORKDIR /app
 COPY . ./
 RUN dotnet restore ./Ccs.Ppg.NotificationService.API/Ccs.Ppg.NotificationService.API.csproj
