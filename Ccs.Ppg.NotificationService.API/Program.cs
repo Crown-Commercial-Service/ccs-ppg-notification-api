@@ -5,7 +5,16 @@ using Ccs.Ppg.NotificationService.API.CustomOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+String envName = "";
+
+if (!String.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")))
+{
+  envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+}
+
+builder.Configuration
+  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+  .AddJsonFile($"appsettings.{envName}.json", optional: true);
 
 var vaultEnabled = builder.Configuration.GetValue<bool>("VaultEnabled");
 if (!vaultEnabled)
