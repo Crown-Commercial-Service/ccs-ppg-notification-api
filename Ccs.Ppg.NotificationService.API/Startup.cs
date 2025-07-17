@@ -5,6 +5,8 @@ using Ccs.Ppg.Utility.Exceptions;
 using Ccs.Ppg.Utility.Logging;
 using Ccs.Ppg.Utility.Swagger;
 using System.Reflection;
+using Rollbar;
+using Rollbar.NetCore.AspNet;
 
 namespace Ccs.Ppg.NotificationService.API
 {
@@ -20,6 +22,20 @@ namespace Ccs.Ppg.NotificationService.API
       services.AddServices(config);
       services.AddControllers();
       services.AddRedis(config);
+      
+      if (!string.IsNullOrEmpty(config["RollBarLogger:Token"]) && !string.IsNullOrEmpty(config["RollBarLogger:Environment"]))
+      {
+        // Enable Rollbar logging
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        RollbarLocator.RollbarInstance.Configure(new RollbarLoggerConfig(config["RollBarLogger:Token"], config["RollBarLogger:Environment"]));
+
+        services.AddRollbarLogger(loggerOptions =>
+        {
+          loggerOptions.Filter = (loggerName, loglevel) => loglevel >= LogLevel.Warning;
+        });
+      }
+      
       services.AddSingleton(s =>
       {
         bool.TryParse(config["IsApiGatewayEnabled"], out bool isApiGatewayEnabled);

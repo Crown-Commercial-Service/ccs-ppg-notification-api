@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Net;
+using Rollbar;
 
 namespace Ccs.Ppg.Utility.Exceptions
 {
@@ -59,11 +59,10 @@ namespace Ccs.Ppg.Utility.Exceptions
 
         private async Task HandleException(HttpContext context, string displayError, Exception ex, HttpStatusCode statusCode)
         {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine(JsonConvert.SerializeObject(ex));
-            _logger.LogError(ex, displayError);
+            RollbarLocator.RollbarInstance.Error(ex);
 
             context.Response.StatusCode = (int)statusCode;
+            
             await context.Response.WriteAsync(displayError);
         }
     }
