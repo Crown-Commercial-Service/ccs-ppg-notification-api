@@ -71,6 +71,9 @@ namespace Ccs.Ppg.NotificationService.API.CustomOptions
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/LinkRegex", "NotificationValidationConfigurations:LinkRegex"));
       configurations.Add(_awsParameterStoreService.GetParameter(parameters, path + "NotificationValidationConfigurations/CcsMsg", "NotificationValidationConfigurations:CcsMsg"));
 
+      // NOTE: Using a different path here so that we can share keys, rather than endlessly duplicate them in AWS
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, "/conclave-sso/security/RollBarLogger/Token", "RollBarLogger:Token"));
+      configurations.Add(_awsParameterStoreService.GetParameter(parameters, "/conclave-sso/security/RollBarLogger/Environment", "RollBarLogger:Environment"));
 
       foreach (var configuration in configurations)
       {
