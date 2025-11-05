@@ -15,7 +15,7 @@
     <PackageReference Include="Npgsql" Version="9.0.3" />
     <PackageReference Include="StackExchange.Redis" Version="2.9.25" />
 	<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-	<PackageReference Include="System.Drawing.Common" Version="9.0.9" />
+	<PackageReference Include="System.Drawing.Common" Version="9.0.10" />
   </ItemGroup>
 
   <ItemGroup>
