@@ -16,7 +16,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.10" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Rollbar.NetCore.AspNet" Version="5.2.2" />
-		<PackageReference Include="System.Text.Encodings.Web" Version="9.0.10" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="10.0.7" />
 	</ItemGroup>
 
 	<ItemGroup>
