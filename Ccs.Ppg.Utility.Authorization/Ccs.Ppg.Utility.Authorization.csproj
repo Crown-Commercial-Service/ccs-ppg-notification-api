@@ -19,7 +19,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.3.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.3.10" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="System.Text.Encodings.Web" Version="10.0.8" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="10.0.11" />
 	</ItemGroup>
 
 	<ItemGroup>
