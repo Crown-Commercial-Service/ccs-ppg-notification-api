@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<BuildPackage>true</BuildPackage>
@@ -11,17 +11,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.13" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.19" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.15" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.15" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Rollbar.NetCore.AspNet" Version="5.2.2" />
-		<PackageReference Include="System.Text.Encodings.Web" Version="10.0.11" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="10.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
-  	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.8" />
-  	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.8" />
+  	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.15" />
+  	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.15" />
 		<_PackageFiles Include="$(OutputPath)\*.dll">
 			<BuildAction>None</BuildAction>
 			<PackagePath>lib\net8.0\</PackagePath>
