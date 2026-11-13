@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-  	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.15" />
+  	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="11.0.0" />
   	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.15" />
 		<_PackageFiles Include="$(OutputPath)\*.dll">
 			<BuildAction>None</BuildAction>
