@@ -3,7 +3,7 @@ PPG Notification Service API Micro-Service
 
 Overview
 --------
-This is the code for the Notification Service API micro-service of Crown Commercial Service's (_CCS_)
+This is the code for the Notification Service API micro-service of Government Commercial Agency's (_GCA_)
 Public Procurement Gateway (_PPG_).
 
 Technology Overview
@@ -12,7 +12,7 @@ The project is implemented as a .NET Core web application, implemented using NuG
 
 The core technologies for the project are:
 
-* .NET Core 8
+* .NET Core 10
 * NuGet for package management
 * XUnit for unit testing
 
